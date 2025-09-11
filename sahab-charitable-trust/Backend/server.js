@@ -6,9 +6,15 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-// ✅ PORT & MONGO_URI
+//  PORT & MONGO_URI
 const PORT = process.env.PORT || 8080;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/ngoDB";
+
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true
+}));
+
 
 // Middleware
 app.use(cors());
