@@ -1,0 +1,97 @@
+:root {
+  font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #222;
+  background-color: #f6fff9;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eafaf1 0%, #f6fff9 100%);
+}
+
+a {
+  color: #27ae60;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #219150;
+}
+
+h1, h2, h3 {
+  margin: 0.5em 0;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+section, .full-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.08);
+  margin: 2rem 0;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 0.75em 1.5em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #27ae60;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover {
+  background-color: #219150;
+  box-shadow: 0 4px 16px rgba(44,62,80,0.12);
+}
+button:focus,
+button:focus-visible {
+  outline: 3px solid #27ae60;
+}
+
+footer {
+  background: #222;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.section-divider {
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, #27ae60 0%, #eafaf1 100%);
+  margin: 2rem auto;
+  border-radius: 1px;
+}
+
+@media (max-width: 600px) {
+  section, .full-section {
+    padding: 1rem 0.5rem;
+    border-radius: 0;
+    margin: 0;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1.2em;
+  }
+}
