@@ -9,11 +9,12 @@ const Programs = () => {
     fetch(`${baseURL}/api/programs`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Programs fetched:", data);
-        setPrograms(data);
+        const cleanData = Array.isArray(data) ? data : data.data || [];
+        console.log("✅ Programs fetched:", cleanData);
+        setPrograms(cleanData);
       })
       .catch((err) => {
-        console.error("API error:", err);
+        console.error("❌ API error:", err);
       });
   }, []);
 
@@ -31,7 +32,7 @@ const Programs = () => {
       <h1
         style={{
           color: "#27ae60",
-          marginBottom: "2rem",
+          marginBottom: "1rem",
           textAlign: "center",
           fontSize: "2.5rem",
           fontWeight: "bold",
@@ -39,6 +40,11 @@ const Programs = () => {
       >
         Our Programs
       </h1>
+
+      {/* Debug UI */}
+      <p style={{ textAlign: "center", color: "#555", marginBottom: "2rem" }}>
+        Total programs fetched: {programs.length}
+      </p>
 
       {programs.length === 0 ? (
         <p style={{ textAlign: "center", color: "#999" }}>
