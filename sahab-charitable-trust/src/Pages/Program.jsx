@@ -3,12 +3,18 @@ import ProgramCard from "../components/ProgramCard";
 
 const Programs = () => {
   const [programs, setPrograms] = useState([]);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/programs")
+    fetch(`${baseURL}/api/programs`)
       .then((res) => res.json())
-      .then((data) => setPrograms(data))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        console.log("Programs fetched:", data);
+        setPrograms(data);
+      })
+      .catch((err) => {
+        console.error("API error:", err);
+      });
   }, []);
 
   const containerStyle = {
@@ -33,17 +39,24 @@ const Programs = () => {
       >
         Our Programs
       </h1>
-      <div style={containerStyle}>
-        {programs.map((program) => (
-          <ProgramCard
-            key={program._id}
-            id={program.category} 
-            title={program.title}
-            description={program.description}
-            image={program.image}
-          />
-        ))}
-      </div>
+
+      {programs.length === 0 ? (
+        <p style={{ textAlign: "center", color: "#999" }}>
+          No programs available right now. Please check back soon!
+        </p>
+      ) : (
+        <div style={containerStyle}>
+          {programs.map((program) => (
+            <ProgramCard
+              key={program._id}
+              id={program.category}
+              title={program.title}
+              description={program.description}
+              image={program.image}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
