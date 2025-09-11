@@ -21,6 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
+console.log("Connecting to MongoDB URI:", MONGO_URI);
 mongoose.connect(MONGO_URI)
   .then(() => console.log("✅ DB Connected"))
   .catch(err => console.error("❌ DB Connection Error:", err));
