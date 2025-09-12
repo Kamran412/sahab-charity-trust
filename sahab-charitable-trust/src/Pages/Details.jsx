@@ -2,27 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Details = () => {
-  // const { id } = useParams();
-  const { category } = useParams();
+  const { category } = useParams(); // ✅ Use category from URL
   const navigate = useNavigate();
   const [program, setProgram] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // fetch(`http://localhost:8080/api/programs/${id}`)
-    // fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${id}`)
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${category}`)
-      .then((res) => res.json())
+    if (!category) return;
+
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${category}`) // ✅ category-based route
+      .then((res) => {
+        if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         setProgram(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Fetch error:", err.message);
         setLoading(false);
       });
-  }, [category]
-);console.log("Fetching program for category:", category);
+  }, [category]);
 
   if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
   if (!program) return (
@@ -39,7 +40,15 @@ const Details = () => {
       <p style={{ fontSize: "1.1rem", color: "#555", lineHeight: 1.6 }}>{program.details}</p>
       <button
         onClick={() => navigate(-1)}
-        style={{ padding: "0.6rem 1.2rem", backgroundColor: "#27ae60", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer", fontWeight: "bold" }}
+        style={{
+          padding: "0.6rem 1.2rem",
+          backgroundColor: "#27ae60",
+          color: "#fff",
+          border: "none",
+          borderRadius: 6,
+          cursor: "pointer",
+          fontWeight: "bold"
+        }}
       >
         Back
       </button>

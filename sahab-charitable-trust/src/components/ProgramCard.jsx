@@ -39,7 +39,7 @@ const buttonStyle = {
 const placeholder =
   'https://images.unsplash.com/photo-1465101178521-c1a4c8a0f8f9?auto=format&fit=crop&w=400&q=80';
 
-const ProgramCard = ({ id, title, description, image }) => {
+const ProgramCard = ({ category, title, description, image }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -51,7 +51,6 @@ const ProgramCard = ({ id, title, description, image }) => {
       <img src={image || placeholder} alt={title} style={imageStyle} />
       <h3 style={{ color: '#27ae60', margin: '0.5rem 0' }}>{title}</h3>
       <p style={{ fontSize: '1rem', margin: '0.5rem 0' }}>{description}</p>
-      {/* <Link to={`/details/${id}`}> */}
       <Link to={`/details/${category}`}>
         <button style={buttonStyle}>Learn More</button>
       </Link>

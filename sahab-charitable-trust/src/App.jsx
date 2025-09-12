@@ -87,7 +87,6 @@ function App() {
         <Route path="/get-involved" element={<GetInvolved />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/events" element={<UpcomingEvents />} />
-        {/* <Route path="/details/:id" element={<Details />} /> */}
         <Route path="/details/:category" element={<Details />} />
         <Route path="/partner" element={<PartnerWithUs />} />
         <Route path="/impact" element={<Impact />} />
