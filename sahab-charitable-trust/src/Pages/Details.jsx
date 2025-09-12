@@ -21,7 +21,8 @@ const Details = () => {
         console.error(err);
         setLoading(false);
       });
-  }, [id]);
+  }, [category]
+);console.log("Fetching program for category:", category);
 
   if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
   if (!program) return (
