@@ -3,19 +3,13 @@ import ProgramCard from "../components/ProgramCard";
 
 const Programs = () => {
   const [programs, setPrograms] = useState([]);
-  const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${baseURL}/api/programs`)
+    fetch("http://localhost:8080/api/programs")
       .then((res) => res.json())
-      .then((data) => {
-        console.log("Programs fetched:", data);
-        setPrograms(data);
-      })
-      .catch((err) => {
-        console.error("API error:", err);
-      });
-  }, []);
+      .then((data) => setPrograms(data))
+      .catch((err) => console.error(err));
+       }, []);
 
   const containerStyle = {
     display: "grid",

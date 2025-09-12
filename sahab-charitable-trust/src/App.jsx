@@ -8,7 +8,6 @@ import HeroSection from "./components/HeroSection";
 import ProgramCard from "./components/ProgramCard";
 import Footer from "./components/Footer";
 import ContactForm from "./components/ContactForm";
-import DonateButton from "./components/DonateButton";
 import FloatingMenu from "./components/FloatingMenu";
 
 // Pages
@@ -82,7 +81,6 @@ function App() {
         {/* Other Pages */}
         <Route path="/about" element={<About />} />
         <Route path="/program" element={<Program />} />
-        <Route path="/program/:id" element={<Program />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/gallery" element={<Gallery />} />
