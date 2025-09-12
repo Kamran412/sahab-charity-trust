@@ -5,7 +5,8 @@ const Programs = () => {
   const [programs, setPrograms] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/programs")
+    // fetch("http://localhost:8080/api/programs")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs`)
       .then((res) => res.json())
       .then((data) => setPrograms(data))
       .catch((err) => console.error(err));
@@ -43,7 +44,7 @@ const Programs = () => {
           {programs.map((program) => (
             <ProgramCard
               key={program._id}
-              id={program.category}
+              id={program.id}
               title={program.title}
               description={program.description}
               image={program.image}

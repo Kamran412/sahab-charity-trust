@@ -6,21 +6,20 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-//  PORT & MONGO_URI
+// 🔧 Config
 const PORT = process.env.PORT || 8080;
-const MONGO_URI = process.env.MONGO_URI ;
+const MONGO_URI = process.env.MONGO_URI;
 
+// ✅ CORS Setup
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
   credentials: true
 }));
 
-
-// Middleware
-app.use(cors());
+// 📦 Middleware
 app.use(bodyParser.json());
 
-// MongoDB Connection
+// 🔌 MongoDB Connection
 console.log("Connecting to MongoDB URI:", MONGO_URI);
 mongoose.connect(MONGO_URI)
   .then(() => console.log("✅ DB Connected"))
@@ -58,20 +57,19 @@ const Donate = mongoose.model("Donate", donateSchema);
 
 const programSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  category: { type: String, required: true, unique: true }, // unique id for routing
+  category: { type: String, required: true, unique: true },
   description: String,
   details: String,
   image: String,
-  date: { type: Date, default: Date.now },
+  date: { type: Date, default: Date.now }
 });
 const Program = mongoose.model("Program", programSchema);
 
-// ✅ NEW: Contact Schema
 const contactSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   message: { type: String, required: true },
-  date: { type: Date, default: Date.now },
+  date: { type: Date, default: Date.now }
 });
 const Contact = mongoose.model("Contact", contactSchema);
 
