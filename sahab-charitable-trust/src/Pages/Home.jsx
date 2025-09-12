@@ -7,7 +7,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/programs")
+    fetch("https://sahab-charity-trust-1.onrender.com/api/programs")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched programs:", data); // ✅ Debug log
