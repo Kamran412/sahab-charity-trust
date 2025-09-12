@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Details = () => {
-  const { category } = useParams(); // ✅ Use category from URL
+  const { category } = useParams(); // ✅ This must be declared before using `category`
   const navigate = useNavigate();
   const [program, setProgram] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10,7 +10,9 @@ const Details = () => {
   useEffect(() => {
     if (!category) return;
 
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${category}`) // ✅ category-based route
+    console.log("Fetching program for category:", category); // ✅ Debug log
+
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${category}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Server responded with ${res.status}`);
         return res.json();
@@ -20,10 +22,10 @@ const Details = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Fetch error:", err.message);
+        console.error("Fetch error:", err);
         setLoading(false);
       });
-  }, [category]);
+  }, [category]); // ✅ Correct dependency
 
   if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
   if (!program) return (
