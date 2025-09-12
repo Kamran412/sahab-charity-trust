@@ -40,6 +40,7 @@ const placeholder =
   'https://images.unsplash.com/photo-1465101178521-c1a4c8a0f8f9?auto=format&fit=crop&w=400&q=80';
 
 const ProgramCard = ({ category, title, description, image }) => {
+  console.log("ProgramCard received category:", category); //
   const [hovered, setHovered] = useState(false);
 
   return (
