@@ -8,7 +8,8 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/programs/${id}`)
+    // fetch(`http://localhost:8080/api/programs/${id}`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProgram(data);

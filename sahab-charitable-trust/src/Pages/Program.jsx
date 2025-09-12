@@ -52,7 +52,7 @@ const Programs = () => {
           {programs.map((program) => (
             <ProgramCard
               key={program._id}
-              id={program.id}
+              id={program._id}
               title={program.title}
               description={program.description}
               image={program.image}
