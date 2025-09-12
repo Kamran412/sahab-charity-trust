@@ -2,104 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProgramCard from "./ProgramCard";
 
-const styles = {
-  section: {
-    maxWidth: 700,
-    margin: "3rem auto",
-    padding: "2rem",
-    background: "#fff",
-    borderRadius: "16px",
-    boxShadow: "0 4px 24px rgba(44,62,80,0.08)",
-    textAlign: "center",
-  },
-  hero: {
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    backgroundImage:
-      'url("https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1200&q=80")',
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    color: "#fff",
-    textAlign: "center",
-  },
-  overlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    background: "rgba(39, 174, 96, 0.65)",
-    zIndex: 1,
-  },
-  heroContent: {
-    position: "relative",
-    zIndex: 2,
-    maxWidth: 600,
-    margin: "0 auto",
-  },
-  button: {
-    padding: "0.75rem 2rem",
-    background: "#27ae60",
-    color: "#fff",
-    borderRadius: "4px",
-    fontWeight: "bold",
-    fontSize: "1.1rem",
-    marginTop: "2rem",
-    cursor: "pointer",
-    boxShadow: "0 2px 8px rgba(44,62,80,0.08)",
-    textDecoration: "none",
-    display: "inline-block",
-  },
-  programs: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "2rem",
-    margin: "3rem auto",
-    maxWidth: 1200,
-  },
-  donate: {
-    maxWidth: 600,
-    margin: "3rem auto",
-    padding: "2rem",
-    background: "#eafaf1",
-    borderRadius: "16px",
-    boxShadow: "0 4px 24px rgba(44,62,80,0.08)",
-    textAlign: "center",
-  },
-  eventsSection: {
-    padding: "3rem 2rem",
-    background: "#f9f9f9",
-    textAlign: "center",
-  },
-  eventsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "1.5rem",
-    maxWidth: "1000px",
-    margin: "0 auto 2rem",
-  },
-  eventCard: {
-    background: "#fff",
-    borderRadius: "10px",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
-    padding: "1.5rem",
-    textAlign: "left",
-  },
-  linkButton: {
-    display: "inline-block",
-    padding: "0.8rem 1.5rem",
-    background: "#27ae60",
-    color: "#fff",
-    borderRadius: "6px",
-    textDecoration: "none",
-    fontWeight: "bold",
-  },
-};
-
 const Home = () => {
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -108,11 +10,12 @@ const Home = () => {
     fetch("http://localhost:8080/api/programs")
       .then((res) => res.json())
       .then((data) => {
+        console.log("Fetched programs:", data); // ✅ Debug log
         setPrograms(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Fetch error:", err);
         setLoading(false);
       });
   }, []);
@@ -155,15 +58,17 @@ const Home = () => {
           {loading ? (
             <p>Loading Programs...</p>
           ) : (
-            programs.map((program) => (
-              <ProgramCard
-                key={program._id}
-                category={program.category}
-                title={program.title}
-                description={program.description}
-                image={program.image}
-              />
-            ))
+            programs
+              .filter((program) => program.category) // ✅ Skip broken entries
+              .map((program) => (
+                <ProgramCard
+                  key={program._id}
+                  category={program.category}
+                  title={program.title}
+                  description={program.description}
+                  image={program.image}
+                />
+              ))
           )}
         </div>
       </section>
