@@ -158,7 +158,7 @@ const Home = () => {
             programs.map((program) => (
               <ProgramCard
                 key={program._id}
-                id={program.category}
+                category={program.category}
                 title={program.title}
                 description={program.description}
                 image={program.image}
