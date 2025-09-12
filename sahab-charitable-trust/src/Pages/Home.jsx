@@ -12,6 +12,7 @@ const Home = () => {
       .then((data) => {
         console.log("Fetched programs:", data); // ✅ Debug log
         setPrograms(data);
+        console.log("Fetched programs:", data);
         setLoading(false);
       })
       .catch((err) => {
