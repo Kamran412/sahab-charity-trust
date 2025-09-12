@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Details = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
+  const { category } = useParams();
   const navigate = useNavigate();
   const [program, setProgram] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // fetch(`http://localhost:8080/api/programs/${id}`)
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${id}`)
+    // fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${id}`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs/${category}`)
       .then((res) => res.json())
       .then((data) => {
         setProgram(data);

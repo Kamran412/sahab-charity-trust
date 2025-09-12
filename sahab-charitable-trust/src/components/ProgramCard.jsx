@@ -51,7 +51,8 @@ const ProgramCard = ({ id, title, description, image }) => {
       <img src={image || placeholder} alt={title} style={imageStyle} />
       <h3 style={{ color: '#27ae60', margin: '0.5rem 0' }}>{title}</h3>
       <p style={{ fontSize: '1rem', margin: '0.5rem 0' }}>{description}</p>
-      <Link to={`/details/${id}`}>
+      {/* <Link to={`/details/${id}`}> */}
+      <Link to={`/details/${category}`}>
         <button style={buttonStyle}>Learn More</button>
       </Link>
     </div>
