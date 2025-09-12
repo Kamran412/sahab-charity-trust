@@ -4,13 +4,21 @@ import ProgramCard from "../components/ProgramCard";
 const Programs = () => {
   const [programs, setPrograms] = useState([]);
 
-  useEffect(() => {
-    // fetch("http://localhost:8080/api/programs")
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/programs`)
-      .then((res) => res.json())
-      .then((data) => setPrograms(data))
-      .catch((err) => console.error(err));
-       }, []);
+ useEffect(() => {
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/programs`;
+  console.log("Fetching from:", url); // ✅ Debug log
+
+  fetch(url)
+    .then((res) => {
+      if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Fetched programs:", data); // ✅ Confirm data
+      setPrograms(data);
+    })
+    .catch((err) => console.error("Fetch error:", err.message));
+}, []);
 
   const containerStyle = {
     display: "grid",
