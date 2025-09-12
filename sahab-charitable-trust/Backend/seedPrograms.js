@@ -5,7 +5,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 const programSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  category: { type: String, required: true, unique: true },
+  category: { type: String, required: true},
   description: String,
   details: String,
   image: String,
