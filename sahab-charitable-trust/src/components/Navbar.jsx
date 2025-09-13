@@ -42,9 +42,13 @@ const Navbar = () => {
   const closeDropdown = () => setOpenDropdown(null);
   const toggleMobile = () => setMobileOpen(!mobileOpen);
 
+  const handleMobileClose = () => {
+    if (isMobile) setMobileOpen(false);
+  };
+
   const styles = {
     navbar: {
-      position: "fixed", // changed from sticky
+      position: "fixed",
       top: 0,
       left: 0,
       right: 0,
@@ -57,7 +61,7 @@ const Navbar = () => {
       alignItems: "center",
       justifyContent: "space-between",
       flexWrap: "wrap",
-      boxSizing: "border-box", // added for layout stability
+      boxSizing: "border-box",
     },
     logoContainer: {
       display: "flex",
@@ -141,43 +145,43 @@ const Navbar = () => {
 
       <ul style={styles.navList}>
         <li>
-          <NavLink to="/" style={styles.link} activeStyle={styles.active}>Home</NavLink>
+          <NavLink to="/" style={styles.link} activeStyle={styles.active} onClick={handleMobileClose}>Home</NavLink>
         </li>
 
         <li style={{ position: "relative" }} onMouseEnter={() => handleDropdown("programs")} onMouseLeave={closeDropdown}>
           <span style={{ ...styles.link, cursor: "pointer" }}>Programs ▾</span>
           {openDropdown === "programs" && (
             <div className="dropdown-menu" style={styles.dropdownMenu}>
-              <NavLink to="/program" style={styles.dropdownItem}>Program</NavLink>
-              <NavLink to="/events" style={styles.dropdownItem}>Upcoming Events</NavLink>
+              <NavLink to="/program" style={styles.dropdownItem} onClick={handleMobileClose}>Program</NavLink>
+              <NavLink to="/events" style={styles.dropdownItem} onClick={handleMobileClose}>Upcoming Events</NavLink>
             </div>
           )}
         </li>
 
         <li>
-          <NavLink to="/about" style={styles.link} activeStyle={styles.active}>About</NavLink>
+          <NavLink to="/about" style={styles.link} activeStyle={styles.active} onClick={handleMobileClose}>About</NavLink>
         </li>
         <li>
-          <NavLink to="/gallery" style={styles.link} activeStyle={styles.active}>Gallery</NavLink>
+          <NavLink to="/gallery" style={styles.link} activeStyle={styles.active} onClick={handleMobileClose}>Gallery</NavLink>
         </li>
 
         <li style={{ position: "relative" }} onMouseEnter={() => handleDropdown("involved")} onMouseLeave={closeDropdown}>
           <span style={{ ...styles.link, cursor: "pointer" }}>Get Involved ▾</span>
           {openDropdown === "involved" && (
             <div className="dropdown-menu" style={styles.dropdownMenu}>
-              <NavLink to="/volunteer" style={styles.dropdownItem}>Volunteer</NavLink>
-              <NavLink to="/partner" style={styles.dropdownItem}>Partner With Us</NavLink>
-              <NavLink to="/donate" style={styles.dropdownItem}>Donate</NavLink>
+              <NavLink to="/volunteer" style={styles.dropdownItem} onClick={handleMobileClose}>Volunteer</NavLink>
+              <NavLink to="/partner" style={styles.dropdownItem} onClick={handleMobileClose}>Partner With Us</NavLink>
+              <NavLink to="/donate" style={styles.dropdownItem} onClick={handleMobileClose}>Donate</NavLink>
             </div>
           )}
         </li>
 
         <li>
-          <NavLink to="/contact" style={styles.link} activeStyle={styles.active}>Contact</NavLink>
+          <NavLink to="/contact" style={styles.link} activeStyle={styles.active} onClick={handleMobileClose}>Contact</NavLink>
         </li>
 
         <li>
-          <NavLink to="/donate" style={styles.donate}>Donate</NavLink>
+          <NavLink to="/donate" style={styles.donate} onClick={handleMobileClose}>Donate</NavLink>
         </li>
       </ul>
     </nav>
