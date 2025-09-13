@@ -99,7 +99,7 @@ const Donate = () => {
     padding: "0.75rem",
     width: "100%",
     maxWidth: "300px",
-    margin: "0.5rem auto",
+    marginBottom: "1rem",
     borderRadius: "6px",
     border: "1px solid #ccc",
     fontSize: "1rem",
@@ -107,81 +107,108 @@ const Donate = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", padding: "120px 1rem 2rem", background: "#f6fff9", textAlign: "center" }}>
-      <h1 style={{ color: "#27ae60", fontSize: "2rem", marginBottom: "0.5rem" }}>Support Our Mission</h1>
-      <p style={{ maxWidth: 600, margin: "0 auto 2rem", fontSize: "1.1rem", lineHeight: 1.6 }}>
-        Your donation helps us provide education, healthcare, and empowerment programs for women and children in need.
-      </p>
-
-      {/* Donation Form */}
-      <input
-        type="text"
-        placeholder="Full Name"
-        value={formData.name}
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        style={inputStyle}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        style={inputStyle}
-      />
-      <input
-        type="tel"
-        placeholder="Phone"
-        value={formData.phone}
-        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-        style={inputStyle}
-      />
-      <input
-        type="number"
-        min="100"
-        placeholder="Amount (₹)"
-        value={formData.amount}
-        onChange={(e) => setFormData({ ...formData, amount: Number(e.target.value) })}
-        style={inputStyle}
-      />
-
-      <button
-        onClick={handleDonate}
-        disabled={loading}
-        style={{
-          padding: "0.75rem 2rem",
-          background: "#27ae60",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-          fontSize: "1.1rem",
-          fontWeight: "bold",
-          marginTop: "1rem",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-        }}
-      >
-        {loading ? "Processing..." : `Donate ₹${formData.amount}`}
-      </button>
-
-      {/* QR Code for UPI */}
-      <div
-        style={{
-          marginTop: "2rem",
-          padding: "1.5rem",
+    <div style={{
+      minHeight: "100vh",
+      paddingTop: "120px",
+      paddingBottom: "2rem",
+      background: "#f6fff9",
+      fontFamily: "Segoe UI, sans-serif",
+    }}>
+      <div style={{
+        maxWidth: "1000px",
+        margin: "0 auto",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "2rem",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        padding: "0 1rem",
+      }}>
+        {/* Left: Donation Form */}
+        <div style={{
+          flex: "1 1 400px",
           background: "#fff",
+          padding: "2rem",
           borderRadius: "12px",
-          display: "inline-block",
           boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-        }}
-      >
-        <h3 style={{ marginBottom: "1rem", color: "#333" }}>Or Scan & Pay via UPI</h3>
-        <QRCode
-          value="upi://pay?pa=sahabtrust@ibl&pn=Sahab%20Charitable%20Trust&cu=INR"
-          size={180}
-        />
-        <p style={{ marginTop: "1rem", fontSize: "1rem", color: "#555" }}>
-          UPI ID: <strong>sahabtrust@ibl</strong>
-        </p>
+        }}>
+          <h2 style={{ color: "#27ae60", marginBottom: "1rem" }}>Support Our Mission</h2>
+          <p style={{ fontSize: "1.1rem", marginBottom: "2rem", color: "#555" }}>
+            Your donation helps us provide education, healthcare, and empowerment programs for women and children in need.
+          </p>
+
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            style={inputStyle}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            style={inputStyle}
+          />
+          <input
+            type="tel"
+            placeholder="Phone"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            style={inputStyle}
+          />
+          <input
+            type="number"
+            min="100"
+            placeholder="Amount (₹)"
+            value={formData.amount}
+            onChange={(e) => setFormData({ ...formData, amount: Number(e.target.value) })}
+            style={inputStyle}
+          />
+
+          <button
+            onClick={handleDonate}
+            disabled={loading}
+            style={{
+              width: "100%",
+              padding: "0.75rem",
+              background: "#27ae60",
+              color: "#fff",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "1.1rem",
+              fontWeight: "bold",
+              cursor: "pointer",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+            }}
+          >
+            {loading ? "Processing..." : `Donate ₹${formData.amount}`}
+          </button>
+        </div>
+
+        {/* Right: QR + Impact Message */}
+        <div style={{
+          flex: "1 1 300px",
+          background: "#fff",
+          padding: "2rem",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+          textAlign: "center",
+        }}>
+          <h3 style={{ marginBottom: "1rem", color: "#333" }}>Or Scan & Pay via UPI</h3>
+          <QRCode
+            value="upi://pay?pa=sahabtrust@ibl&pn=Sahab%20Charitable%20Trust&cu=INR"
+            size={180}
+          />
+          <p style={{ marginTop: "1rem", fontSize: "1rem", color: "#555" }}>
+            UPI ID: <strong>sahabtrust@ibl</strong>
+          </p>
+          <hr style={{ margin: "2rem 0", borderColor: "#eee" }} />
+          <p style={{ fontSize: "1rem", color: "#777" }}>
+            Every ₹100 you donate helps us reach one more child with education, healthcare, and hope.
+          </p>
+        </div>
       </div>
     </div>
   );
