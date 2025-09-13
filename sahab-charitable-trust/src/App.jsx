@@ -47,25 +47,25 @@ function App() {
                 }}
               >
                 <ProgramCard
-                  id="women-empowerment"
+                  category="women-empowerment"
                   title="Women's Empowerment"
                   description="Supporting women and children in local communities."
                   image="women-empowerment.jpg"
                 />
                 <ProgramCard
-                  id="education"
+                 category="education"
                   title="Child Education"
                   description="Providing free education and resources for underprivileged children."
                   image="education.jpg"
                 />
                 <ProgramCard
-                  id="healthcare"
+                 category="healthcare"
                   title="Healthcare Access"
                   description="Ensuring women and children receive proper healthcare and support."
                   image="healthcare.jpg"
                 />
                 <ProgramCard
-                  id="disaster-relief"
+                  category="disaster-relief"
                   title="Natural Disaster Relief"
                   description="Providing immediate assistance and long-term support to communities affected by natural disasters."
                   image="disaster-relief.jpg"
