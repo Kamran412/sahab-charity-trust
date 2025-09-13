@@ -34,83 +34,107 @@ const Testimonials = () => {
     }
   };
 
+  const styles = {
+    page: {
+      minHeight: "100vh",
+      paddingTop: "120px",
+      paddingBottom: "2rem",
+      backgroundColor: "#f6fff9",
+      fontFamily: "Segoe UI, sans-serif",
+    },
+    container: {
+      maxWidth: "800px",
+      margin: "0 auto",
+      padding: "2rem",
+      textAlign: "center",
+    },
+    heading: {
+      color: "#27ae60",
+      marginBottom: "2rem",
+      fontSize: "2rem",
+    },
+    card: {
+      marginBottom: "2rem",
+      padding: "1.25rem",
+      background: "#fff",
+      borderRadius: "10px",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
+      textAlign: "left",
+    },
+    quote: {
+      fontStyle: "italic",
+      marginBottom: "0.5rem",
+      fontSize: "1.05rem",
+      color: "#444",
+    },
+    name: {
+      fontWeight: "bold",
+      color: "#333",
+    },
+    button: {
+      padding: "0.75rem 1.5rem",
+      backgroundColor: "#27ae60",
+      color: "#fff",
+      border: "none",
+      borderRadius: "6px",
+      fontSize: "1rem",
+      cursor: "pointer",
+      marginTop: "1rem",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+    },
+    input: {
+      width: "100%",
+      padding: "0.75rem",
+      marginBottom: "1rem",
+      borderRadius: "6px",
+      border: "1px solid #ccc",
+      fontSize: "1rem",
+      boxSizing: "border-box",
+    },
+  };
+
   return (
-    <div style={{ maxWidth: 800, margin: "3rem auto", padding: "2rem", textAlign: "center" }}>
-      <h2 style={{ color: "#27ae60", marginBottom: "1rem" }}>What People Say</h2>
+    <div style={styles.page}>
+      <div style={styles.container}>
+        <h2 style={styles.heading}>What People Say</h2>
 
-      {testimonials.map((t, i) => (
-        <div key={i} style={{ marginBottom: "2rem", padding: "1rem", background: "#f9f9f9", borderRadius: "8px" }}>
-          <p style={{ fontStyle: "italic", marginBottom: "0.5rem" }}>"{t.quote}"</p>
-          <strong>- {t.name}</strong>
-        </div>
-      ))}
+        {testimonials.map((t, i) => (
+          <div key={i} style={styles.card}>
+            <p style={styles.quote}>"{t.quote}"</p>
+            <p style={styles.name}>– {t.name}</p>
+          </div>
+        ))}
 
-      <button
-        onClick={() => setShowForm(!showForm)}
-        style={{
-          padding: "0.75rem 1.5rem",
-          backgroundColor: "#27ae60",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          fontSize: "1rem",
-          cursor: "pointer",
-          marginTop: "1rem",
-        }}
-      >
-        {showForm ? "Cancel" : "Give Your Experience"}
-      </button>
+        <button onClick={() => setShowForm(!showForm)} style={styles.button}>
+          {showForm ? "Cancel" : "Give Your Experience"}
+        </button>
 
-      {showForm && (
-        <form onSubmit={handleSubmit} style={{ marginTop: "2rem", textAlign: "left" }}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              marginBottom: "1rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              fontSize: "1rem",
-            }}
-          />
-          <textarea
-            name="quote"
-            placeholder="Your Experience"
-            value={formData.quote}
-            onChange={handleChange}
-            required
-            rows={4}
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              marginBottom: "1rem",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              fontSize: "1rem",
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              padding: "0.75rem 1.5rem",
-              backgroundColor: "#27ae60",
-              color: "#fff",
-              border: "none",
-              borderRadius: "6px",
-              fontSize: "1rem",
-              cursor: "pointer",
-            }}
-          >
-            Submit Testimonial
-          </button>
-        </form>
-      )}
+        {showForm && (
+          <form onSubmit={handleSubmit} style={{ marginTop: "2rem", textAlign: "left" }}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              style={styles.input}
+            />
+            <textarea
+              name="quote"
+              placeholder="Your Experience"
+              value={formData.quote}
+              onChange={handleChange}
+              required
+              rows={4}
+              style={styles.input}
+            />
+            <button type="submit" style={styles.button}>
+              Submit Testimonial
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

@@ -24,12 +24,14 @@ import PartnerWithUs from "./Pages/PartnerWithUs";
 import Impact from "./Pages/Impact";
 import Testimonials from "./Pages/Testimonials";
 import FAQ from "./Pages/FAQ";
-import LandingPage from "./Pages/LandingPage"; 
+import LandingPage from "./Pages/LandingPage";
 
 function App() {
   return (
     <Router>
       <Navbar />
+      <FloatingMenu /> {/* ✅ Now appears on all pages */}
+
       <Routes>
         {/* Home Page */}
         <Route
@@ -53,13 +55,13 @@ function App() {
                   image="women-empowerment.jpg"
                 />
                 <ProgramCard
-                 category="education"
+                  category="education"
                   title="Child Education"
                   description="Providing free education and resources for underprivileged children."
                   image="education.jpg"
                 />
                 <ProgramCard
-                 category="healthcare"
+                  category="healthcare"
                   title="Healthcare Access"
                   description="Ensuring women and children receive proper healthcare and support."
                   image="healthcare.jpg"
@@ -73,7 +75,6 @@ function App() {
               </div>
               <ContactForm />
               <Footer />
-              <FloatingMenu />
             </>
           }
         />
