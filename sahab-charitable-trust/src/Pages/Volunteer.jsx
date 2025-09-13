@@ -2,48 +2,14 @@ import React, { useState, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-const formStyle = {
-  maxWidth: "400px",
-  margin: "2rem auto",
-  padding: "2rem",
-  background: "#fff",
-  borderRadius: "10px",
-  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-  textAlign: "center",
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "0.8rem",
-  marginBottom: "1rem",
-  borderRadius: "6px",
-  border: "1px solid #ccc",
-};
-
-const buttonStyle = {
-  padding: "0.8rem 1.5rem",
-  background: "#27ae60",
-  color: "#fff",
-  border: "none",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontWeight: "bold",
-  margin: "0.5rem",
-};
-
-const cardStyle = {
-  width: "320px",
-  margin: "2rem auto",
-  padding: "1.5rem",
-  border: "2px solid #27ae60",
-  borderRadius: "12px",
-  textAlign: "center",
-  background: "#f6fff9",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-};
-
 const Volunteer = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", skills: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    skills: "",
+    message: "",
+  });
   const [volunteerId, setVolunteerId] = useState(null);
   const cardRef = useRef(null);
 
@@ -55,7 +21,6 @@ const Volunteer = () => {
     e.preventDefault();
 
     try {
-      // Backend POST request
       const res = await fetch("http://localhost:8080/api/volunteers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -64,7 +29,6 @@ const Volunteer = () => {
 
       const data = await res.json();
       if (res.ok) {
-        // Backend successful → generate unique Volunteer ID
         const uniqueId = "VOL-" + Math.floor(Math.random() * 100000);
         setVolunteerId(uniqueId);
         alert(data.message || "Volunteer added successfully!");
@@ -90,18 +54,69 @@ const Volunteer = () => {
     pdf.save(`${formData.name}_Volunteer_ID.pdf`);
   };
 
+  const styles = {
+    page: {
+      minHeight: "100vh",
+      paddingTop: "120px",
+      paddingBottom: "2rem",
+      background: "#f6fff9",
+      fontFamily: "Segoe UI, sans-serif",
+    },
+    form: {
+      maxWidth: "400px",
+      margin: "0 auto",
+      padding: "2rem",
+      background: "#fff",
+      borderRadius: "12px",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+      textAlign: "center",
+    },
+    input: {
+      width: "100%",
+      padding: "0.8rem",
+      marginBottom: "1rem",
+      borderRadius: "6px",
+      border: "1px solid #ccc",
+      fontSize: "1rem",
+      boxSizing: "border-box",
+    },
+    button: {
+      padding: "0.8rem 1.5rem",
+      background: "#27ae60",
+      color: "#fff",
+      border: "none",
+      borderRadius: "6px",
+      cursor: "pointer",
+      fontWeight: "bold",
+      marginTop: "0.5rem",
+      width: "100%",
+      fontSize: "1.05rem",
+    },
+    card: {
+      width: "320px",
+      margin: "2rem auto",
+      padding: "1.5rem",
+      border: "2px solid #27ae60",
+      borderRadius: "12px",
+      textAlign: "center",
+      background: "#fff",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    },
+  };
+
   return (
-    <div>
+    <div style={styles.page}>
       {!volunteerId ? (
-        <form style={formStyle} onSubmit={handleSubmit}>
-          <h2 style={{ marginBottom: "1rem", color: "#27ae60" }}>
-            Become a Volunteer
-          </h2>
+        <form style={styles.form} onSubmit={handleSubmit}>
+          <h2 style={{ marginBottom: "1rem", color: "#27ae60" }}>Become a Volunteer</h2>
+          <p style={{ fontSize: "1rem", color: "#555", marginBottom: "1.5rem" }}>
+            Join Sahab Charitable Trust and help uplift communities through your time and skills.
+          </p>
           <input
             type="text"
             name="name"
-            placeholder="Enter your full name"
-            style={inputStyle}
+            placeholder="Full Name"
+            style={styles.input}
             value={formData.name}
             onChange={handleChange}
             required
@@ -109,8 +124,8 @@ const Volunteer = () => {
           <input
             type="email"
             name="email"
-            placeholder="Enter your email"
-            style={inputStyle}
+            placeholder="Email"
+            style={styles.input}
             value={formData.email}
             onChange={handleChange}
             required
@@ -118,8 +133,8 @@ const Volunteer = () => {
           <input
             type="tel"
             name="phone"
-            placeholder="Enter your phone number"
-            style={inputStyle}
+            placeholder="Phone Number"
+            style={styles.input}
             value={formData.phone}
             onChange={handleChange}
             required
@@ -127,39 +142,35 @@ const Volunteer = () => {
           <input
             type="text"
             name="skills"
-            placeholder="Your skills"
-            style={inputStyle}
+            placeholder="Your Skills"
+            style={styles.input}
             value={formData.skills}
             onChange={handleChange}
           />
           <textarea
             name="message"
             placeholder="Message (optional)"
-            style={{ ...inputStyle, height: "80px" }}
+            style={{ ...styles.input, height: "80px", resize: "vertical" }}
             value={formData.message}
             onChange={handleChange}
           />
-          <button type="submit" style={buttonStyle}>
-            Get Volunteer ID
-          </button>
+          <button type="submit" style={styles.button}>Get Volunteer ID</button>
         </form>
       ) : (
         <div style={{ textAlign: "center" }}>
-          <div ref={cardRef} style={cardStyle}>
-            <h3 style={{ color: "#27ae60" }}>Volunteer ID Card</h3>
-            <p><b>Name:</b> {formData.name}</p>
-            <p><b>Email:</b> {formData.email}</p>
-            <p><b>Phone:</b> {formData.phone}</p>
-            {formData.skills && <p><b>Skills:</b> {formData.skills}</p>}
-            {formData.message && <p><b>Message:</b> {formData.message}</p>}
-            <p><b>Volunteer ID:</b> {volunteerId}</p>
+          <div ref={cardRef} style={styles.card}>
+            <h3 style={{ color: "#27ae60", marginBottom: "1rem" }}>Volunteer ID Card</h3>
+            <p><strong>Name:</strong> {formData.name}</p>
+            <p><strong>Email:</strong> {formData.email}</p>
+            <p><strong>Phone:</strong> {formData.phone}</p>
+            {formData.skills && <p><strong>Skills:</strong> {formData.skills}</p>}
+            {formData.message && <p><strong>Message:</strong> {formData.message}</p>}
+            <p><strong>Volunteer ID:</strong> {volunteerId}</p>
             <p style={{ marginTop: "1rem", fontStyle: "italic", color: "#555" }}>
               Sahab Charitable Trust
             </p>
           </div>
-          <button style={buttonStyle} onClick={downloadPDF}>
-            Download ID Card
-          </button>
+          <button style={styles.button} onClick={downloadPDF}>Download ID Card</button>
         </div>
       )}
     </div>
