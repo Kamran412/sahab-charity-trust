@@ -25,6 +25,10 @@ const Navbar = () => {
           display: none !important;
         }
       }
+      html {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
     `;
     document.head.appendChild(styleTag);
 
@@ -40,8 +44,10 @@ const Navbar = () => {
 
   const styles = {
     navbar: {
-      position: "sticky",
+      position: "fixed", // changed from sticky
       top: 0,
+      left: 0,
+      right: 0,
       width: "100%",
       background: "#fff",
       boxShadow: "0 1px 6px rgba(0,0,0,0.05)",
@@ -51,6 +57,7 @@ const Navbar = () => {
       alignItems: "center",
       justifyContent: "space-between",
       flexWrap: "wrap",
+      boxSizing: "border-box", // added for layout stability
     },
     logoContainer: {
       display: "flex",
