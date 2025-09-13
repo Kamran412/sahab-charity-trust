@@ -72,11 +72,6 @@ const FloatingMenu = () => {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
           }
-          @media (min-width: 769px) {
-            .floating-menu {
-              display: none !important;
-            }
-          }
           .floating-menu a:hover {
             background-color: #f6fff9;
           }
